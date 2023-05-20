@@ -76,6 +76,7 @@ void UGJInteractionComponent::FindBestInteractable()
 				{
 					MeshComp->SetOverlayMaterial(HighlightMaterial);
 				}
+				OnInteractableChanged.Broadcast(TEXT("-INTERACT-"));
 				FocusedActor = HitActor;
 				break;
 			}
@@ -95,6 +96,7 @@ void UGJInteractionComponent::FindBestInteractable()
 		{
 			MeshComp->SetOverlayMaterial(nullptr);
 		}
+		OnInteractableChanged.Broadcast(TEXT(""));
 	}
 
 	FocusedActor = nullptr;
