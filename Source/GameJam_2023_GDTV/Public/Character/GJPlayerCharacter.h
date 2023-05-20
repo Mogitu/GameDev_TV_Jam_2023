@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "GJCharacter.h"
 #include "GJPlayerCharacter.generated.h"
 
 class UGJUserWidget;
@@ -11,7 +11,7 @@ class UGJInteractionComponent;
 class UCameraComponent;
 
 UCLASS()
-class GAMEJAM_2023_GDTV_API AGJPlayerCharacter : public ACharacter
+class GAMEJAM_2023_GDTV_API AGJPlayerCharacter : public AGJCharacter
 {
 	GENERATED_BODY()
 

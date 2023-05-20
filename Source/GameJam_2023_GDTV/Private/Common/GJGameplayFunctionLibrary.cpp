@@ -5,7 +5,7 @@
 
 #include "Common/GJHealthComponent.h"
 
-bool UGJGameplayFunctionLibrary::DamageActor(AActor* DamageCauser, AActor* TargetActor, float DamageAmount)
+bool UGJGameplayFunctionLibrary::ApplyDamage(AActor* DamageCauser, AActor* TargetActor, float DamageAmount)
 {
 	if (UGJHealthComponent* HealthComponent = UGJHealthComponent::GetHealthComponent(TargetActor))
 	{
@@ -15,7 +15,7 @@ bool UGJGameplayFunctionLibrary::DamageActor(AActor* DamageCauser, AActor* Targe
 	return false;
 }
 
-bool UGJGameplayFunctionLibrary::HealActor(AActor* HealerActor, AActor* TargetActor, float HealAmount)
+bool UGJGameplayFunctionLibrary::ApplyHealing(AActor* HealerActor, AActor* TargetActor, float HealAmount)
 {
 	if (UGJHealthComponent* HealthComponent = UGJHealthComponent::GetHealthComponent(TargetActor))
 	{

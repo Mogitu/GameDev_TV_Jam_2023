@@ -16,8 +16,8 @@ class GAMEJAM_2023_GDTV_API UGJGameplayFunctionLibrary : public UBlueprintFuncti
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
-	static bool DamageActor(AActor* DamageCauser, AActor* TargetActor, float DamageAmount);
+	static bool ApplyDamage(AActor* DamageCauser, AActor* TargetActor, float DamageAmount);
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
-	static bool HealActor(AActor* HealerActor, AActor* TargetActor, float HealAmount);
+	static bool ApplyHealing(AActor* HealerActor, AActor* TargetActor, float HealAmount);
 };
