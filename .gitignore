@@ -81,3 +81,4 @@ Content/*
 
 #But do not ignore the games content
 !Content/_Game/
+Platforms/HoloLens/Config/HoloLensEngine.ini
