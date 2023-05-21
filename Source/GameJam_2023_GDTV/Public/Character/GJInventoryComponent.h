@@ -20,6 +20,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void CollectItem(UPickupData* PickupData);
 
+	UPROPERTY(BlueprintAssignable)
+	FOnPickupCollected OnPickupCollected;
+
 private:
 	UPROPERTY()
 	TArray<UPickupData*> CollectedItems;

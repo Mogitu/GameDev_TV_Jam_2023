@@ -29,7 +29,7 @@ void AGJPlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 	if (HudWidgetClass != nullptr)
 	{
-		HudWidgetInstance = CreateWidget<UGJUserWidget>(GetWorld(), HudWidgetClass);
+		HudWidgetInstance = CreateWidget<UUserWidget>(GetWorld(), HudWidgetClass);
 		HudWidgetInstance->AddToViewport();
 	}
 }

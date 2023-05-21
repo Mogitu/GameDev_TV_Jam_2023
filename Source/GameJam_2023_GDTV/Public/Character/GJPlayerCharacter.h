@@ -52,8 +52,8 @@ private:
 	TObjectPtr<UGJInventoryComponent> InventoryComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category="UI")
-	TSubclassOf<UGJUserWidget> HudWidgetClass;
+	TSubclassOf<UUserWidget> HudWidgetClass;
 
 	UPROPERTY()
-	TObjectPtr<UGJUserWidget> HudWidgetInstance;
+	TObjectPtr<UUserWidget> HudWidgetInstance;
 };

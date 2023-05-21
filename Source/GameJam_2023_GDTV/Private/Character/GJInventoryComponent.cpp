@@ -7,5 +7,6 @@
 
 void UGJInventoryComponent::CollectItem(UPickupData* PickupData)
 {
-	CollectedItems.Add(PickupData);	
+	CollectedItems.Add(PickupData);
+	OnPickupCollected.Broadcast(PickupData);
 }
