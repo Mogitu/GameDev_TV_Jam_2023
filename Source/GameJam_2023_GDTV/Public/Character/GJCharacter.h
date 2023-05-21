@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "GJCharacter.generated.h"
 
+class UGJAbilityComponent;
 class UGJHealthComponent;
 
 UCLASS()
@@ -19,4 +20,7 @@ public:
 protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UGJHealthComponent> HealthComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UGJAbilityComponent> AbilityComponent;
 };
