@@ -15,7 +15,7 @@ class GAMEJAM_2023_GDTV_API AGJCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	AGJCharacter();
+	AGJCharacter();	
 
 protected:
 	UPROPERTY(VisibleAnywhere)

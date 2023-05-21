@@ -3,18 +3,52 @@
 
 #include "Ability/GJAbility.h"
 
-void UGJAbility::StartAbility_Implementation()
-{
-}
+#include "Ability/GJAbilityComponent.h"
 
-void UGJAbility::StopAbility_Implementation()
+UGJAbility::UGJAbility()
 {
+	OwningComponent = Cast<UGJAbilityComponent>(GetOuter());
 }
 
 bool UGJAbility::CanStart_Implementation(AActor* Instigator)
 {
+	if (IsRunning())
+	{
+		return false;
+	}
+
+	UGJAbilityComponent* Comp = OwningComponent;
+
+	if (Comp->ActiveGameplayTags.HasAny(BlockedTags))
+	{
+		return false;
+	}
+
+	return true;
+}
+
+void UGJAbility::StartAbility_Implementation(AActor* Instigator)
+{
+	UGJAbilityComponent* Comp = OwningComponent;
+	Comp->ActiveGameplayTags.AppendTags(GrantsTags);
+	TimeStarted = GetWorld()->TimeSeconds;
+
+	bIsRunning = true;
+
+	OwningComponent->OnAbilityStarted.Broadcast(OwningComponent, this);
+}
+
+void UGJAbility::StopAbility_Implementation(AActor* Instigator)
+{
+	UGJAbilityComponent* Comp = OwningComponent;
+	Comp->ActiveGameplayTags.RemoveTags(GrantsTags);
+
+	bIsRunning = false;
+
+	OwningComponent->OnAbilityStopped.Broadcast(OwningComponent, this);
 }
 
 bool UGJAbility::IsRunning() const
 {
+	return bIsRunning;
 }

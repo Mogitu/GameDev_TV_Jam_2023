@@ -34,7 +34,9 @@ public:
 	void Turn(float Value);
 	void LookUp(float Value);
 	void Interact();
-
+	void UsePrimaryAbility();
+	void UseSecondaryAbility();
+	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 

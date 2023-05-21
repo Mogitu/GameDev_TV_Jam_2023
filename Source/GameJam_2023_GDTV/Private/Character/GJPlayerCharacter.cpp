@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Character\GJPlayerCharacter.h"
+
+#include "Ability/GJAbilityComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Interaction/GJInteractionComponent.h"
@@ -78,6 +80,16 @@ void AGJPlayerCharacter::Interact()
 	InteractionComponent->Interact();
 }
 
+void AGJPlayerCharacter::UsePrimaryAbility()
+{
+	AbilityComponent->StartAbilityByName(this, TEXT("PrimaryAbility"));
+}
+
+void AGJPlayerCharacter::UseSecondaryAbility()
+{
+	AbilityComponent->StartAbilityByName(this, TEXT("SecondaryAbility"));
+}
+
 // Called to bind functionality to input
 void AGJPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -90,4 +102,6 @@ void AGJPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AGJPlayerCharacter::Interact);
+	PlayerInputComponent->BindAction("PrimaryAbility", IE_Pressed, this, &AGJPlayerCharacter::UsePrimaryAbility);
+	PlayerInputComponent->BindAction("SecondaryAbility", IE_Pressed, this, &AGJPlayerCharacter::UseSecondaryAbility);
 }
