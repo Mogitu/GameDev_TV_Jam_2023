@@ -4,6 +4,7 @@
 
 #include "Ability/GJAbilityComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Character/GJInventoryComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Interaction/GJInteractionComponent.h"
 #include "Widget/GJUserWidget.h"
@@ -19,6 +20,7 @@ AGJPlayerCharacter::AGJPlayerCharacter()
 	CameraComponent->bUsePawnControlRotation = true;
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
+	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
 }
 
 // Called when the game starts or when spawned

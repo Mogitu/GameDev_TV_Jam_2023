@@ -8,6 +8,7 @@
 
 class UGJUserWidget;
 class UGJInteractionComponent;
+class UGJInventoryComponent;
 class UCameraComponent;
 
 UCLASS()
@@ -36,7 +37,7 @@ public:
 	void Interact();
 	void UsePrimaryAbility();
 	void UseSecondaryAbility();
-	
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -46,6 +47,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Character")
 	TObjectPtr<UGJInteractionComponent> InteractionComponent;
+
+	UPROPERTY(VisibleAnywhere, Category="Character")
+	TObjectPtr<UGJInventoryComponent> InventoryComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category="UI")
 	TSubclassOf<UGJUserWidget> HudWidgetClass;
