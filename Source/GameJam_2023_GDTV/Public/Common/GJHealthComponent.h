@@ -28,6 +28,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Health")
 	void ApplyHealthChange(AActor* Instigator, float Delta);
 
+	UFUNCTION(BlueprintCallable)
+	float GetHealthPercentage() const;
+
+	UFUNCTION(BlueprintCallable)
+	float GetHealthFraction() const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category="Health")
 	float Health;
