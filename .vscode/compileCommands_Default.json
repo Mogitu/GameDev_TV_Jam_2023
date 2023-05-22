@@ -1,0 +1,202 @@
+[
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\GameJam_2023_GDTV.Build.cs",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\GameJam_2023_GDTV.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\GameJam_2023_GDTV.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\AI\\GJ_MonsterAI.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Ability\\GJAbility.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Ability\\GJAbilityComponent.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Character\\GJCharacter.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Character\\GJPlayerCharacter.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Common\\GJGameplayFunctionLibrary.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Common\\GJHealthComponent.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\GameMode\\GJGameMode.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Interaction\\GJInteractionComponent.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Interaction\\GJInteractionInterface.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Private\\Widget\\GJUserWidget.cpp",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\AI\\GJ_MonsterAI.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Ability\\GJAbility.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Ability\\GJAbilityComponent.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Character\\GJCharacter.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Character\\GJPlayerCharacter.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Common\\GJGameplayFunctionLibrary.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Common\\GJHealthComponent.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\GameMode\\GJGameMode.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Interaction\\GJInteractionComponent.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Interaction\\GJInteractionInterface.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "E:\\Code\\GameDev_TV_Jam_2023\\Source\\GameJam_2023_GDTV\\Public\\Widget\\GJUserWidget.h",
+		"arguments": [
+			"E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default\\GameJam_2023_GDTV.261.rsp"
+		],
+		"directory": "E:\\UE_5.2\\Engine\\Source"
+	}
+]

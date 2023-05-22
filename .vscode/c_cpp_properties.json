@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "GameJam_2023_GDTVEditor Editor Win64 Development (GameJam_2023_GDTV)",
+            "compilerPath": "E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64",
+            "configurationProvider": "epic.ue",
+            "compileCommands": "E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_GameJam_2023_GDTV.json"
+        },
+        {
+            "name": "Win32",
+            "compilerPath": "E:\\VSC\\VC\\Tools\\MSVC\\14.34.31933\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "msvc-x64",
+            "configurationProvider": "epic.ue",
+            "compileCommands": "E:\\Code\\GameDev_TV_Jam_2023\\.vscode\\compileCommands_Default.json"
+        }
+    ],
+    "version": 4
+}
