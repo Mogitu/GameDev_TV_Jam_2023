@@ -21,6 +21,10 @@ AGJPlayerCharacter::AGJPlayerCharacter()
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
 	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
+
+	WeaponMesh->SetupAttachment(CameraComponent);
+	WeaponMesh->SetHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
@@ -90,6 +94,11 @@ void AGJPlayerCharacter::UsePrimaryAbility()
 void AGJPlayerCharacter::UseSecondaryAbility()
 {
 	AbilityComponent->StartAbilityByName(this, TEXT("SecondaryAbility"));
+}
+
+void AGJPlayerCharacter::EquipWeapon()
+{
+	WeaponMesh->SetHiddenInGame(false);
 }
 
 // Called to bind functionality to input

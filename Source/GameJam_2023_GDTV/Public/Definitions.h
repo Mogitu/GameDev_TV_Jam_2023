@@ -17,3 +17,13 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Pickup Data")
 	FName Name;
 };
+
+UCLASS(BlueprintType)
+class UWeaponData : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon Data")
+	UStaticMeshComponent* WeaponMesh;	
+};

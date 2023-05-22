@@ -38,6 +38,9 @@ public:
 	void UsePrimaryAbility();
 	void UseSecondaryAbility();
 
+	UFUNCTION(BlueprintCallable)
+	void EquipWeapon();
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -50,6 +53,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category="Character")
 	TObjectPtr<UGJInventoryComponent> InventoryComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category="Character")
+	TObjectPtr<UStaticMeshComponent> WeaponMesh;
 
 	UPROPERTY(EditDefaultsOnly, Category="UI")
 	TSubclassOf<UUserWidget> HudWidgetClass;
