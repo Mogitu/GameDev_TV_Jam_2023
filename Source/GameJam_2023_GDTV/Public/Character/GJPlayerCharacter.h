@@ -8,6 +8,7 @@
 
 class UGJUserWidget;
 class UGJInteractionComponent;
+class UGJInventoryComponent;
 class UCameraComponent;
 
 UCLASS()
@@ -25,6 +26,18 @@ protected:
 
 	virtual FVector GetPawnViewLocation() const override;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
+	TObjectPtr<UCameraComponent> CameraComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
+	TObjectPtr<UGJInteractionComponent> InteractionComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
+	TObjectPtr<UGJInventoryComponent> InventoryComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
+	TObjectPtr<UStaticMeshComponent> WeaponMesh;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -36,20 +49,17 @@ public:
 	void Interact();
 	void UsePrimaryAbility();
 	void UseSecondaryAbility();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void EquipWeapon();
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	UPROPERTY(VisibleAnywhere, Category="Character")
-	TObjectPtr<UCameraComponent> CameraComponent;
-
-	UPROPERTY(VisibleAnywhere, Category="Character")
-	TObjectPtr<UGJInteractionComponent> InteractionComponent;
-
 	UPROPERTY(EditDefaultsOnly, Category="UI")
-	TSubclassOf<UGJUserWidget> HudWidgetClass;
+	TSubclassOf<UUserWidget> HudWidgetClass;
 
 	UPROPERTY()
-	TObjectPtr<UGJUserWidget> HudWidgetInstance;
+	TObjectPtr<UUserWidget> HudWidgetInstance;
 };
