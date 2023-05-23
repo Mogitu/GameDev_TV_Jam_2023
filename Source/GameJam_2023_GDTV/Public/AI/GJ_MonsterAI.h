@@ -13,7 +13,15 @@ UCLASS()
 class GAMEJAM_2023_GDTV_API AGJ_MonsterAI : public AAIController
 {
 	GENERATED_BODY()
+
+public:
+	virtual void Tick(float DeltaSeconds) override;
 	
 protected:
 	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	class UBehaviorTree* AIBehavior;
+	
 };
