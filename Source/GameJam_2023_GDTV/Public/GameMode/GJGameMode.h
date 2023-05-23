@@ -15,5 +15,9 @@ class GAMEJAM_2023_GDTV_API AGJGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
+
+	UFUNCTION(BlueprintCallable)
+	bool AllWeaponPartsCollected();
+	
 	void OnActorKilled(AActor* Victim, AActor* Killer);
 };

@@ -4,6 +4,7 @@
 
 #include "Ability/GJAbilityComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Character/GJInventoryComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Interaction/GJInteractionComponent.h"
 #include "Widget/GJUserWidget.h"
@@ -19,6 +20,11 @@ AGJPlayerCharacter::AGJPlayerCharacter()
 	CameraComponent->bUsePawnControlRotation = true;
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
+	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
+
+	WeaponMesh->SetupAttachment(CameraComponent);
+	WeaponMesh->SetHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
@@ -27,7 +33,7 @@ void AGJPlayerCharacter::BeginPlay()
 	Super::BeginPlay();
 	if (HudWidgetClass != nullptr)
 	{
-		HudWidgetInstance = CreateWidget<UGJUserWidget>(GetWorld(), HudWidgetClass);
+		HudWidgetInstance = CreateWidget<UUserWidget>(GetWorld(), HudWidgetClass);
 		HudWidgetInstance->AddToViewport();
 	}
 }
@@ -88,6 +94,11 @@ void AGJPlayerCharacter::UsePrimaryAbility()
 void AGJPlayerCharacter::UseSecondaryAbility()
 {
 	AbilityComponent->StartAbilityByName(this, TEXT("SecondaryAbility"));
+}
+
+void AGJPlayerCharacter::EquipWeapon()
+{
+	WeaponMesh->SetHiddenInGame(false);
 }
 
 // Called to bind functionality to input

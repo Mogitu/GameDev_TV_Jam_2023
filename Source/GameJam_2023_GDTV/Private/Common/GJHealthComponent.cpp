@@ -3,6 +3,8 @@
 
 #include "Common/GJHealthComponent.h"
 
+#include "CookerSettings.h"
+#include "MathUtil.h"
 #include "GameMode/GJGameMode.h"
 
 UGJHealthComponent* UGJHealthComponent::GetHealthComponent(AActor* FromActor)
@@ -45,4 +47,16 @@ void UGJHealthComponent::ApplyHealthChange(AActor* Instigator, float Delta)
 			GM->OnActorKilled(GetOwner(), Instigator);
 		}
 	}
+}
+
+float UGJHealthComponent::GetHealthPercentage() const
+{
+	float Percentage = (Health / MaxHealth) * 100;
+	return FMathf::Clamp(Percentage, 0, MaxHealth);
+}
+
+float UGJHealthComponent::GetHealthFraction() const
+{
+	float Fraction = Health / MaxHealth;
+	return FMathf::Clamp(Fraction, 0, 1);
 }
