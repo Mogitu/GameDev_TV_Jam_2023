@@ -37,12 +37,12 @@ protected:
 	TObjectPtr<UGJInventoryComponent> InventoryComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
-	TObjectPtr<USceneComponent> WeaponTransform;	
+	TObjectPtr<USceneComponent> WeaponTransform;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	UPROPERTY()
+	AGJWeapon* CurrentWeapon;
 
+public:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Turn(float Value);

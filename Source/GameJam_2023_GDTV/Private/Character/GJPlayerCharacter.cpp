@@ -13,15 +13,12 @@
 // Sets default values
 AGJPlayerCharacter::AGJPlayerCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->bUsePawnControlRotation = true;
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
-	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));	
+	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
 
 	WeaponTransform = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponTransform"));
 	WeaponTransform->SetupAttachment(CameraComponent);
@@ -41,12 +38,6 @@ void AGJPlayerCharacter::BeginPlay()
 FVector AGJPlayerCharacter::GetPawnViewLocation() const
 {
 	return CameraComponent->GetComponentLocation();
-}
-
-// Called every frame
-void AGJPlayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void AGJPlayerCharacter::MoveForward(float Value)
@@ -88,7 +79,11 @@ void AGJPlayerCharacter::Interact()
 
 void AGJPlayerCharacter::UsePrimaryAbility()
 {
-	AbilityComponent->StartAbilityByName(this, TEXT("PrimaryAbility"));
+	if (IsValid(CurrentWeapon))
+	{
+		CurrentWeapon->Fire();
+	}
+	//AbilityComponent->StartAbilityByName(this, TEXT("PrimaryAbility"));
 }
 
 void AGJPlayerCharacter::UseSecondaryAbility()
@@ -98,8 +93,8 @@ void AGJPlayerCharacter::UseSecondaryAbility()
 
 void AGJPlayerCharacter::EquipWeapon(AGJWeapon* WeaponToEquip)
 {
-	//WeaponMesh->SetHiddenInGame(false);
-	WeaponToEquip->GetRootComponent()->AttachToComponent(WeaponTransform, FAttachmentTransformRules::SnapToTargetIncludingScale);
+	WeaponToEquip->Equip(this, WeaponTransform);
+	CurrentWeapon = WeaponToEquip;
 }
 
 // Called to bind functionality to input

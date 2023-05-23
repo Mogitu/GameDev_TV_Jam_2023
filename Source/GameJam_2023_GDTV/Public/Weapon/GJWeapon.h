@@ -15,10 +15,23 @@ public:
 	// Sets default values for this actor's properties
 	AGJWeapon();
 
+	UFUNCTION(BlueprintCallable)
+	UStaticMeshComponent* GetWeaponMesh();
+
+	UFUNCTION(BlueprintCallable)
+	void Equip(AActor* ActorThatEquips, USceneComponent* Comp);
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 protected:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> WeaponMesh;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY()
+	APawn* OwningCharacter;
 };

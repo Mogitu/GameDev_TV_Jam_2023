@@ -2,7 +2,6 @@
 
 
 #include "Character/GJCharacter.h"
-
 #include "Ability/GJAbilityComponent.h"
 #include "Common/GJHealthComponent.h"
 
@@ -13,4 +12,15 @@ AGJCharacter::AGJCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 	HealthComponent = CreateDefaultSubobject<UGJHealthComponent>(TEXT("HealthComponent"));
 	AbilityComponent = CreateDefaultSubobject<UGJAbilityComponent>(TEXT("AbilityComponent"));
+}
+
+void AGJCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	HealthComponent->OnHealthChanged.AddDynamic(this, &AGJCharacter::OnHealthChanged);
+}
+
+void AGJCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
+                                   float Delta)
+{
 }
