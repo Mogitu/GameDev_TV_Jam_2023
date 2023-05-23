@@ -6,6 +6,7 @@
 #include "GJCharacter.h"
 #include "GJPlayerCharacter.generated.h"
 
+class AGJWeapon;
 class UGJUserWidget;
 class UGJInteractionComponent;
 class UGJInventoryComponent;
@@ -36,9 +37,9 @@ protected:
 	TObjectPtr<UGJInventoryComponent> InventoryComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Character")
-	TObjectPtr<UStaticMeshComponent> WeaponMesh;
+	TObjectPtr<USceneComponent> WeaponTransform;	
 
-public:
+public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -51,7 +52,7 @@ public:
 	void UseSecondaryAbility();
 
 	UFUNCTION(BlueprintCallable)
-	void EquipWeapon();
+	void EquipWeapon(AGJWeapon* WeaponToEquip);
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

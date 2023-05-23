@@ -7,6 +7,7 @@
 #include "Character/GJInventoryComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Interaction/GJInteractionComponent.h"
+#include "Weapon/GJWeapon.h"
 #include "Widget/GJUserWidget.h"
 
 // Sets default values
@@ -20,11 +21,10 @@ AGJPlayerCharacter::AGJPlayerCharacter()
 	CameraComponent->bUsePawnControlRotation = true;
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
-	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
+	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));	
 
-	WeaponMesh->SetupAttachment(CameraComponent);
-	WeaponMesh->SetHiddenInGame(true);
+	WeaponTransform = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponTransform"));
+	WeaponTransform->SetupAttachment(CameraComponent);
 }
 
 // Called when the game starts or when spawned
@@ -96,9 +96,10 @@ void AGJPlayerCharacter::UseSecondaryAbility()
 	AbilityComponent->StartAbilityByName(this, TEXT("SecondaryAbility"));
 }
 
-void AGJPlayerCharacter::EquipWeapon()
+void AGJPlayerCharacter::EquipWeapon(AGJWeapon* WeaponToEquip)
 {
-	WeaponMesh->SetHiddenInGame(false);
+	//WeaponMesh->SetHiddenInGame(false);
+	WeaponToEquip->GetRootComponent()->AttachToComponent(WeaponTransform, FAttachmentTransformRules::SnapToTargetIncludingScale);
 }
 
 // Called to bind functionality to input
