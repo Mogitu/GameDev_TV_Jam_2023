@@ -1,10 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Weapon/GJWeapon.h"
-
 #include "Common/GJGameplayFunctionLibrary.h"
-#include "Common/GJHealthComponent.h"
 #include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
 
 // Sets default values
@@ -12,12 +9,16 @@ AGJWeapon::AGJWeapon()
 {
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weaponmesh"));
 	SetRootComponent(WeaponMesh);
+	MaxAmmo = 6;
+	DamageAmount = 25;
+	ShotDistance = 5000;
 }
 
 // Called when the game starts or when spawned
 void AGJWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+	CurrentAmmo = MaxAmmo;
 }
 
 UStaticMeshComponent* AGJWeapon::GetWeaponMesh()
@@ -35,9 +36,15 @@ void AGJWeapon::Equip(AActor* ActorThatEquips, USceneComponent* Comp)
 
 void AGJWeapon::Fire()
 {
+	if (CurrentAmmo <= 0)
+	{
+		LogOnScreen(this, "NO AMMO LEFT");
+		return;
+	}
+
 	FVector TraceDirection = OwningCharacter->GetControlRotation().Vector();
 	FVector TraceStart = OwningCharacter->GetPawnViewLocation();
-	FVector TraceEnd = TraceStart + (TraceDirection * 5000);
+	FVector TraceEnd = TraceStart + (TraceDirection * ShotDistance);
 	FHitResult HitResult;
 
 	FCollisionQueryParams Params;
@@ -46,7 +53,7 @@ void AGJWeapon::Fire()
 	if (GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ECC_Pawn, Params))
 	{
 		AActor* HitActor = HitResult.GetActor();
-		UGJGameplayFunctionLibrary::DamageActor(OwningCharacter, HitActor, 10);
-		LogOnScreen(this, "YES" + HitActor->GetName());
+		UGJGameplayFunctionLibrary::DamageActor(OwningCharacter, HitActor, DamageAmount);
 	}
+	CurrentAmmo--;
 }

@@ -23,10 +23,13 @@ void AGJMonsterCharacter::Tick(float DeltaTime)
 void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
                                           float Delta)
 {
-	AAIController* AIC = Cast<AAIController>(GetController());
-	if (AIC)
+	if (NewHealth <= 0.0f && Delta < 0.0f)
 	{
-		AIC->GetBrainComponent()->StopLogic("Killed");
+		AAIController* AIC = Cast<AAIController>(GetController());
+		if (AIC)
+		{
+			AIC->GetBrainComponent()->StopLogic("Killed");
+		}
+		Destroy();
 	}
-	Destroy();
 }

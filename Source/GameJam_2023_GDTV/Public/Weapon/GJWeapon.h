@@ -25,7 +25,19 @@ public:
 	void Fire();
 
 protected:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float ShotDistance;	
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	int32 MaxAmmo;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float DamageAmount;
+
+	UPROPERTY(BlueprintReadOnly, Category="Weapon")
+	int32 CurrentAmmo;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> WeaponMesh;
 
 	// Called when the game starts or when spawned
