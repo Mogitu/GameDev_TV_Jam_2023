@@ -3,6 +3,7 @@
 
 #include "GameMode/GJGameMode.h"
 
+#include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
 #include "Interaction/GJPickup.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -15,4 +16,5 @@ bool AGJGameMode::AllWeaponPartsCollected()
 
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
+	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
 }

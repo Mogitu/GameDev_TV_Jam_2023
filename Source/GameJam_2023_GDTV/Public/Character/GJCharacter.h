@@ -15,9 +15,14 @@ class GAMEJAM_2023_GDTV_API AGJCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	AGJCharacter();	
+	AGJCharacter();
 
 protected:
+	virtual void PostInitializeComponents() override;
+
+	UFUNCTION()
+	virtual void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth, float Delta);
+
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UGJHealthComponent> HealthComponent;
 

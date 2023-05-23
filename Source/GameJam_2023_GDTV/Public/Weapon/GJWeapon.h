@@ -15,10 +15,35 @@ public:
 	// Sets default values for this actor's properties
 	AGJWeapon();
 
+	UFUNCTION(BlueprintCallable)
+	UStaticMeshComponent* GetWeaponMesh();
+
+	UFUNCTION(BlueprintCallable)
+	void Equip(AActor* ActorThatEquips, USceneComponent* Comp);
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 protected:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float ShotDistance;	
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	int32 MaxAmmo;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float DamageAmount;
+
+	UPROPERTY(BlueprintReadOnly, Category="Weapon")
+	int32 CurrentAmmo;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> WeaponMesh;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY()
+	APawn* OwningCharacter;
 };
