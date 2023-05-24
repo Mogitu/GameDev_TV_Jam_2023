@@ -7,24 +7,21 @@
 #include "Character/GJInventoryComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Interaction/GJInteractionComponent.h"
+#include "Weapon/GJWeapon.h"
 #include "Widget/GJUserWidget.h"
 
 // Sets default values
 AGJPlayerCharacter::AGJPlayerCharacter()
 {
-	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
 	CameraComponent->SetupAttachment(GetCapsuleComponent());
 	CameraComponent->bUsePawnControlRotation = true;
 
 	InteractionComponent = CreateDefaultSubobject<UGJInteractionComponent>(TEXT("Interaction Component"));
 	InventoryComponent = CreateDefaultSubobject<UGJInventoryComponent>(TEXT("Inventory Component"));
-	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weapon Mesh"));
 
-	WeaponMesh->SetupAttachment(CameraComponent);
-	WeaponMesh->SetHiddenInGame(true);
+	WeaponTransform = CreateDefaultSubobject<USceneComponent>(TEXT("WeaponTransform"));
+	WeaponTransform->SetupAttachment(CameraComponent);
 }
 
 // Called when the game starts or when spawned
@@ -41,12 +38,6 @@ void AGJPlayerCharacter::BeginPlay()
 FVector AGJPlayerCharacter::GetPawnViewLocation() const
 {
 	return CameraComponent->GetComponentLocation();
-}
-
-// Called every frame
-void AGJPlayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void AGJPlayerCharacter::MoveForward(float Value)
@@ -88,7 +79,11 @@ void AGJPlayerCharacter::Interact()
 
 void AGJPlayerCharacter::UsePrimaryAbility()
 {
-	AbilityComponent->StartAbilityByName(this, TEXT("PrimaryAbility"));
+	if (IsValid(CurrentWeapon))
+	{
+		CurrentWeapon->Fire();
+	}
+	//AbilityComponent->StartAbilityByName(this, TEXT("PrimaryAbility"));
 }
 
 void AGJPlayerCharacter::UseSecondaryAbility()
@@ -96,9 +91,10 @@ void AGJPlayerCharacter::UseSecondaryAbility()
 	AbilityComponent->StartAbilityByName(this, TEXT("SecondaryAbility"));
 }
 
-void AGJPlayerCharacter::EquipWeapon()
+void AGJPlayerCharacter::EquipWeapon(AGJWeapon* WeaponToEquip)
 {
-	WeaponMesh->SetHiddenInGame(false);
+	WeaponToEquip->Equip(this, WeaponTransform);
+	CurrentWeapon = WeaponToEquip;
 }
 
 // Called to bind functionality to input
