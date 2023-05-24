@@ -20,6 +20,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void CollectItem(UPickupData* PickupData);
 
+	UPROPERTY(EditDefaultsOnly, Category="Inventory")
+	TArray<TSubclassOf<AActor>> RequiredGunParts;
+
 	UPROPERTY(BlueprintAssignable)
 	FOnPickupCollected OnPickupCollected;
 
