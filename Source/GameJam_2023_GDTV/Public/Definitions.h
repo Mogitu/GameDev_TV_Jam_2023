@@ -15,7 +15,11 @@ class UPickupData : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Pickup Data")
-	FName Name;	
+	FName Name;
+
+	//Not particularly nice..but yea...
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Pickup Data")
+	TSubclassOf<AActor> PickupClass;
 };
 
 UCLASS(BlueprintType)
@@ -25,5 +29,5 @@ class UWeaponData : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon Data")
-	UStaticMeshComponent* WeaponMesh;	
+	UStaticMeshComponent* WeaponMesh;
 };
