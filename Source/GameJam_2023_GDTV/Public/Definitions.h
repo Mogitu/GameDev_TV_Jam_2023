@@ -15,7 +15,7 @@ class UPickupData : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Pickup Data")
-	FName Name;
+	FName Name;	
 };
 
 UCLASS(BlueprintType)
