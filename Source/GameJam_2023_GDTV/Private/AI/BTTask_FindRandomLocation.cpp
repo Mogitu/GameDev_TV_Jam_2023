@@ -2,7 +2,8 @@
 
 
 #include "AI/BTTask_FindRandomLocation.h"
-
+#include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/BehaviorTreeComponent.h"
 #include "AIController.h"
 #include "NavigationSystem.h"
 
@@ -33,10 +34,10 @@ EBTNodeResult::Type UBTTask_FindRandomLocation::ExecuteTask(UBehaviorTreeCompone
     }
 
     FNavLocation RandomLocation;
-    float SearchRadius = 10000.0f; // Adjust this value to change the range of random movement
+    float SearchRadius = 1000.0f; // Adjust this value to change the range of random movement
     if (NavSystem->GetRandomReachablePointInRadius(CurrentLocation, SearchRadius, RandomLocation))
     {
-        AIController->MoveToLocation(RandomLocation.Location);
+        OwnerComp.GetBlackboardComponent()->SetValueAsVector(GetSelectedBlackboardKey(), RandomLocation.Location);
         return EBTNodeResult::Succeeded;
     }
 

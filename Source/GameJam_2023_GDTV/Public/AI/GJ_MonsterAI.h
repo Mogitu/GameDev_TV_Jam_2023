@@ -4,7 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "Perception/AISenseConfig_Sight.h"
+#include "Perception/AIPerceptionComponent.h"
 #include "GJ_MonsterAI.generated.h"
+
 
 /**
  * 
@@ -15,6 +18,8 @@ class GAMEJAM_2023_GDTV_API AGJ_MonsterAI : public AAIController
 	GENERATED_BODY()
 
 public:
+
+	AGJ_MonsterAI();
 	virtual void Tick(float DeltaSeconds) override;
 	
 protected:
