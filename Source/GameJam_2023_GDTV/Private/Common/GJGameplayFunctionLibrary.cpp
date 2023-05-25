@@ -2,7 +2,6 @@
 
 
 #include "Common/GJGameplayFunctionLibrary.h"
-
 #include "Common/GJHealthComponent.h"
 
 bool UGJGameplayFunctionLibrary::DamageActor(AActor* DamageCauser, AActor* TargetActor, float DamageAmount)

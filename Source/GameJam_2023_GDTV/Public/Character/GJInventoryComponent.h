@@ -26,6 +26,12 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnPickupCollected OnPickupCollected;
 
+	UFUNCTION(BlueprintCallable)
+	TArray<UPickupData*> GetCollectedItems() const;
+
+	UFUNCTION(BlueprintCallable)
+	UPickupData* PopItem();
+
 private:
 	UPROPERTY()
 	TArray<UPickupData*> CollectedItems;

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "GJInteractionComponent.generated.h"
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractableChanged, FString, InteractionText);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractableChanged, FText, InteractionText);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class GAMEJAM_2023_GDTV_API UGJInteractionComponent : public UActorComponent
@@ -24,6 +24,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Interact")
+	FText DefaultInteractionText;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnInteractableChanged OnInteractableChanged;

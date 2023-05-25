@@ -14,6 +14,7 @@ UGJInteractionComponent::UGJInteractionComponent()
 	TraceDistance = 300.0f;
 	CollisionChannel = ECC_WorldDynamic;
 	bDisplayDebugTraces = false;
+	DefaultInteractionText = FText::FromString("-INTERACT-");
 }
 
 // Called when the game starts
@@ -76,8 +77,9 @@ void UGJInteractionComponent::FindBestInteractable()
 				{
 					MeshComp->SetOverlayMaterial(HighlightMaterial);
 				}
-				OnInteractableChanged.Broadcast(TEXT("-INTERACT-"));
 				FocusedActor = HitActor;
+				FText Text = IGJInteractionInterface::Execute_GetInteractText(FocusedActor, nullptr);
+				OnInteractableChanged.Broadcast(!Text.IsEmpty() ? Text : DefaultInteractionText);
 				break;
 			}
 
@@ -96,7 +98,7 @@ void UGJInteractionComponent::FindBestInteractable()
 		{
 			MeshComp->SetOverlayMaterial(nullptr);
 		}
-		OnInteractableChanged.Broadcast(TEXT(""));
+		OnInteractableChanged.Broadcast(FText::FromString(""));
 	}
 
 	FocusedActor = nullptr;
