@@ -4,11 +4,21 @@
 #include "AI/GJ_MonsterAI.h"
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Perception/AIPerceptionComponent.h"
+#include "Perception/AISenseConfig_Sight.h"
+
+AGJ_MonsterAI::AGJ_MonsterAI()
+{
+    PrimaryActorTick.bCanEverTick = true;
+
+}
 
 void AGJ_MonsterAI::BeginPlay()
 {
     Super::BeginPlay();
     APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    
+
     
     if (AIBehavior != nullptr)
     {
@@ -26,3 +36,4 @@ void AGJ_MonsterAI::Tick(float DeltaSeconds)
     APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     Super::Tick(DeltaSeconds);
 }
+
