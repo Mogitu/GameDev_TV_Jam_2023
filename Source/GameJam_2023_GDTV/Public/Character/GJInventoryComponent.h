@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "GJMonsterCharacter.h"
 #include "GJInventoryComponent.generated.h"
+
 
 class AGJPickup;
 class UPickupData;
@@ -25,6 +27,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnPickupCollected OnPickupCollected;
+
+	UPROPERTY(EditDefaultsOnly, Category="Inventory")
+	AGJMonsterCharacter* MonsterReference;
 
 private:
 	UPROPERTY()
