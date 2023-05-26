@@ -31,6 +31,10 @@ public:
 	void DepleteAmmo(int32 Amount);
 
 protected:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	USoundBase* FireSound;
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
 	float ShotDistance;
 

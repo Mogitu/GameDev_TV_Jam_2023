@@ -64,6 +64,7 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 
 	if (AllPartsCollected())
 	{
+		Super::Interact_Implementation(InstigatorPawn);
 		//spawn the weapon
 		GetWorld()->SpawnActor<AActor>(WeaponToSpawnClass,
 		                               GetActorLocation() + FVector::UpVector * 200,
@@ -75,6 +76,7 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 	}
 
 	TryPlaceWeaponPart(InstigatorPawn);
+	
 }
 
 FText AGJRitualTable::GetInteractText_Implementation(APawn* InstigatorPawn)

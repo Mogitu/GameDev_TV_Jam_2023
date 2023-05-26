@@ -3,6 +3,8 @@
 
 #include "Interaction/GJInteractableActor.h"
 
+#include "Kismet/GameplayStatics.h"
+
 // Sets default values
 AGJInteractableActor::AGJInteractableActor()
 {
@@ -19,4 +21,12 @@ void AGJInteractableActor::BeginPlay()
 FText AGJInteractableActor::GetInteractText_Implementation(APawn* InstigatorPawn)
 {
 	return !InteractionText.IsEmpty() ? InteractionText : FText::FromString("-E-");
+}
+
+void AGJInteractableActor::Interact_Implementation(APawn* InstigatorPawn)
+{
+	if (InteractSound)
+	{
+		UGameplayStatics::SpawnSoundAttached(InteractSound, GetRootComponent());
+	}
 }
