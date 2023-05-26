@@ -18,3 +18,14 @@ void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
 	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
 }
+
+void AGJGameMode::SwapDimension()
+{
+	bGhostDimensionActive = !bGhostDimensionActive;
+	OnDimensionSwitch.Broadcast(bGhostDimensionActive);
+}
+
+bool AGJGameMode::GetGhostDimensionActive() const
+{
+	return bGhostDimensionActive; 
+}
