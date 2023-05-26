@@ -30,6 +30,12 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category="Inventory")
 	AGJMonsterCharacter* MonsterReference;
+	
+	UFUNCTION(BlueprintCallable)
+	TArray<UPickupData*> GetCollectedItems() const;
+
+	UFUNCTION(BlueprintCallable)
+	UPickupData* PopItem();
 
 private:
 	UPROPERTY()
