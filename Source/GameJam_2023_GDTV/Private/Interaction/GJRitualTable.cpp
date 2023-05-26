@@ -74,9 +74,7 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 		bWeaponSpawned = true;
 		return;
 	}
-
 	TryPlaceWeaponPart(InstigatorPawn);
-	
 }
 
 FText AGJRitualTable::GetInteractText_Implementation(APawn* InstigatorPawn)
