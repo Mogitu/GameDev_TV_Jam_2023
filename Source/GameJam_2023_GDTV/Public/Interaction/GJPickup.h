@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GJInteractionInterface.h"
 #include "GameFramework/Actor.h"
+#include "character/GJMonsterCharacter.h"
 #include "GJPickup.generated.h"
+
 
 class UPickupData;
 class USphereComponent;
@@ -29,4 +31,10 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category="Pickup")
 	TObjectPtr<UStaticMeshComponent> PickupMesh;
+
+private:
+	UPROPERTY(EditAnywhere, Category="Pickup")
+	AGJMonsterCharacter* MonsterReference;
+
+	virtual void BeginPlay() override;
 };
