@@ -3,16 +3,30 @@
 #include "AIController.h"
 #include "BrainComponent.h"
 #include "Common/GJHealthComponent.h"
+#include "Character/GJPlayerCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 AGJMonsterCharacter::AGJMonsterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	
+	
+}
+
+void AGJMonsterCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	SpeedFactor = 1.25f;
+	BaseSpeed = 300.0f;
+
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
 }
 
 void AGJMonsterCharacter::Attack()
 {
 	// Print "Player Attacked!"
 	UE_LOG(LogTemp, Warning, TEXT("Player Attacked!"));
+	IncreaseSpeed();
 }
 
 void AGJMonsterCharacter::Tick(float DeltaTime)
@@ -32,4 +46,14 @@ void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComp
 		}
 		Destroy();
 	}
+}
+
+void AGJMonsterCharacter::IncreaseSpeed()
+{
+	BaseSpeed *= SpeedFactor;
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
+}
+AGJMonsterCharacter* AGJMonsterCharacter::GetMonsterCharacterReference()
+{
+	return this;
 }
