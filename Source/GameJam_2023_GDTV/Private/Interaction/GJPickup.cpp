@@ -10,27 +10,29 @@
 AGJPickup::AGJPickup()
 {
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionSphere"));
+	CollisionSphere->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	SetRootComponent(CollisionSphere);
 
 	PickupMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PickupMesh"));
 	PickupMesh->SetupAttachment(GetRootComponent());
-}
-
-void AGJPickup::BeginPlay()
-{
-	Super::BeginPlay();
+	PickupMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	
 }
 
 void AGJPickup::Interact_Implementation(APawn* InstigatorPawn)
 {
+	Super::Interact_Implementation(InstigatorPawn);
 	if (auto Inventory = InstigatorPawn->FindComponentByClass<UGJInventoryComponent>())
 	{
-		Inventory->CollectItem(PickupData);
+		if (PickupData)
+		{
+			Inventory->CollectItem(PickupData);
+		}
+
 		if (MonsterReference != nullptr)
 		{
 			MonsterReference->IncreaseSpeed();
 		}
-
 	}
 	Destroy();
 }

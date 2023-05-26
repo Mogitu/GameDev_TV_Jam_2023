@@ -53,6 +53,11 @@ void AGJMonsterCharacter::IncreaseSpeed()
 	BaseSpeed *= SpeedFactor;
 	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
 }
+
+void AGJMonsterCharacter::OnPickupCollected()
+{
+}
+
 AGJMonsterCharacter* AGJMonsterCharacter::GetMonsterCharacterReference()
 {
 	return this;

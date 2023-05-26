@@ -24,10 +24,20 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	UFUNCTION(BlueprintCallable)
+	void AddAmmo(int32 Amount);
+
+	UFUNCTION(BlueprintCallable)
+	void DepleteAmmo(int32 Amount);
+
 protected:
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
-	float ShotDistance;	
+	USoundBase* FireSound;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float ShotDistance;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
 	int32 MaxAmmo;
 

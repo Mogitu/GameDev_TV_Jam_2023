@@ -7,20 +7,25 @@
 
 void UGJInventoryComponent::CollectItem(UPickupData* PickupData)
 {
-	CollectedItems.Add(PickupData);
+	CollectedItems.Add(PickupData->Name, PickupData);
 	OnPickupCollected.Broadcast(PickupData);
 }
 
-TArray<UPickupData*> UGJInventoryComponent::GetCollectedItems() const
+TMap<FName, UPickupData*> UGJInventoryComponent::GetCollectedItems() const
 {
 	return CollectedItems;
 }
 
-UPickupData* UGJInventoryComponent::PopItem()
+UPickupData* UGJInventoryComponent::GetDataWithKey(FName Key) const
 {
-	if (!CollectedItems.IsEmpty())
+	if (CollectedItems.Contains(Key))
 	{
-		return CollectedItems.Pop();
+		return CollectedItems[Key];
 	}
 	return nullptr;
+}
+
+void UGJInventoryComponent::RemoveItem(FName Name)
+{
+	CollectedItems.Remove(Name);
 }

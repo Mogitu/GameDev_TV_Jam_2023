@@ -22,9 +22,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void CollectItem(UPickupData* PickupData);
 
-	UPROPERTY(EditDefaultsOnly, Category="Inventory")
-	TArray<TSubclassOf<AActor>> RequiredGunParts;
-
 	UPROPERTY(BlueprintAssignable)
 	FOnPickupCollected OnPickupCollected;
 
@@ -32,12 +29,15 @@ public:
 	AGJMonsterCharacter* MonsterReference;
 	
 	UFUNCTION(BlueprintCallable)
-	TArray<UPickupData*> GetCollectedItems() const;
+	TMap<FName, UPickupData*> GetCollectedItems() const;
 
 	UFUNCTION(BlueprintCallable)
-	UPickupData* PopItem();
+	UPickupData* GetDataWithKey(FName Key) const;
+
+	UFUNCTION(BlueprintCallable)
+	void RemoveItem(FName Name);
 
 private:
 	UPROPERTY()
-	TArray<UPickupData*> CollectedItems;
+	TMap<FName, UPickupData*> CollectedItems;
 };

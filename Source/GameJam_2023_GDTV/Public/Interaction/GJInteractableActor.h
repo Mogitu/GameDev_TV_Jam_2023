@@ -20,9 +20,13 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Interaction")
+	USoundBase* InteractSound;
+
 	UPROPERTY(EditDefaultsOnly, Category="Interaction")
 	FText InteractionText;
 
 public:
 	virtual FText GetInteractText_Implementation(APawn* InstigatorPawn) override;
+	virtual void Interact_Implementation(APawn* InstigatorPawn) override;
 };
