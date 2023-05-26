@@ -9,7 +9,7 @@ AGJWeapon::AGJWeapon()
 {
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Weaponmesh"));
 	SetRootComponent(WeaponMesh);
-	MaxAmmo = 6;
+	MaxAmmo = 5;
 	DamageAmount = 25;
 	ShotDistance = 5000;
 }
@@ -18,7 +18,7 @@ AGJWeapon::AGJWeapon()
 void AGJWeapon::BeginPlay()
 {
 	Super::BeginPlay();
-	CurrentAmmo = MaxAmmo;
+	CurrentAmmo = 0;
 }
 
 UStaticMeshComponent* AGJWeapon::GetWeaponMesh()
@@ -55,5 +55,15 @@ void AGJWeapon::Fire()
 		AActor* HitActor = HitResult.GetActor();
 		UGJGameplayFunctionLibrary::DamageActor(OwningCharacter, HitActor, DamageAmount);
 	}
-	CurrentAmmo--;
+	DepleteAmmo(1);
+}
+
+void AGJWeapon::AddAmmo(int32 Amount)
+{
+	CurrentAmmo = FMath::Clamp(CurrentAmmo + Amount, 0, MaxAmmo);
+}
+
+void AGJWeapon::DepleteAmmo(int32 Amount)
+{
+	CurrentAmmo = FMath::Clamp(CurrentAmmo - Amount, 0, MaxAmmo);
 }

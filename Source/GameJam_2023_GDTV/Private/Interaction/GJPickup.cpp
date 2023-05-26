@@ -16,11 +16,6 @@ AGJPickup::AGJPickup()
 	PickupMesh->SetupAttachment(GetRootComponent());
 }
 
-void AGJPickup::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
 void AGJPickup::Interact_Implementation(APawn* InstigatorPawn)
 {
 	if (auto Inventory = InstigatorPawn->FindComponentByClass<UGJInventoryComponent>())
@@ -30,7 +25,6 @@ void AGJPickup::Interact_Implementation(APawn* InstigatorPawn)
 		{
 			MonsterReference->IncreaseSpeed();
 		}
-
 	}
 	Destroy();
 }

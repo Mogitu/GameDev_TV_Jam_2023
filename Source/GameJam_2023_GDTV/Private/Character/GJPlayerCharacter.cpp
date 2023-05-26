@@ -97,6 +97,11 @@ void AGJPlayerCharacter::EquipWeapon(AGJWeapon* WeaponToEquip)
 	CurrentWeapon = WeaponToEquip;
 }
 
+AGJWeapon* AGJPlayerCharacter::GetEquipedWeapon() const
+{
+	return CurrentWeapon;
+}
+
 // Called to bind functionality to input
 void AGJPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
