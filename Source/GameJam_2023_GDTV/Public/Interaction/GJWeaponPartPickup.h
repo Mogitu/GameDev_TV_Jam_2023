@@ -6,6 +6,7 @@
 #include "Interaction/GJPickup.h"
 #include "GJWeaponPartPickup.generated.h"
 
+class UGJDimensionHandlerComponent;
 /**
  * 
  */
@@ -15,12 +16,11 @@ class GAMEJAM_2023_GDTV_API AGJWeaponPartPickup : public AGJPickup
 	GENERATED_BODY()
 
 public:
-	virtual void BeginPlay() override;
-
-	UFUNCTION()
-	void OnDimensionSwitch(bool bGhostDimensionActive);
+	AGJWeaponPartPickup();
 
 protected:
-	UPROPERTY(EditAnywhere, Category="Dimension")
-	bool bInitiallyEnabled;
+	virtual void BeginPlay() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Dimension")
+	TObjectPtr<UGJDimensionHandlerComponent> DimensionHandlerComponent;
 };
