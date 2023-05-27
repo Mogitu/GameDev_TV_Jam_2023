@@ -49,6 +49,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetDimensionSettings(EDimension NewDimension);
 
+	UFUNCTION(BlueprintCallable)
+	void ApplyDimensionSettings(FDimensionSettings Settings);
+
+	UFUNCTION(BlueprintCallable)
+	void ChangeSettingsForDimension(EDimension Dimension, FDimensionSettings Settings);
+
+	UFUNCTION(BlueprintCallable)
+	FDimensionSettings GetCurrentDimensionSettings() const;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -63,5 +72,5 @@ protected:
 	TObjectPtr<UDimensionSettingsData> DimensionSettingsOverride;
 
 private:
-	void ApplyDimensionSettings(FDimensionSettings Settings);
+	FDimensionSettings CurrentDimensionSettings;
 };

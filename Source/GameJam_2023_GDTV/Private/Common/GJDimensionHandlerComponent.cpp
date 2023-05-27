@@ -14,6 +14,11 @@ void UGJDimensionHandlerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	AGJGameMode* Mode = GetWorld()->GetAuthGameMode<AGJGameMode>();
+	if (DimensionSettingsOverride)
+	{
+		GhostDimensionSettings = DimensionSettingsOverride->GhostDimensionSettings;
+		NormalDimensionSettings = DimensionSettingsOverride->NormalDimensionSettings;
+	}
 	Mode->OnDimensionSwitch.AddDynamic(this, &UGJDimensionHandlerComponent::OnDimensionSwitch);
 }
 
@@ -22,22 +27,37 @@ void UGJDimensionHandlerComponent::SetDimensionSettings(EDimension NewDimension)
 	switch (NewDimension)
 	{
 	case EDimension::GhostDimension:
-		ApplyDimensionSettings(DimensionSettingsOverride != nullptr
-			                       ? DimensionSettingsOverride->GhostDimensionSettings
-			                       : GhostDimensionSettings);
+		ApplyDimensionSettings(GhostDimensionSettings);
 		break;
 	case EDimension::NormalDimension:
-		ApplyDimensionSettings(DimensionSettingsOverride != nullptr
-			                       ? DimensionSettingsOverride->NormalDimensionSettings
-			                       : NormalDimensionSettings);
+		ApplyDimensionSettings(NormalDimensionSettings);
 		break;
 	}
+}
+
+FDimensionSettings UGJDimensionHandlerComponent::GetCurrentDimensionSettings() const
+{
+	return CurrentDimensionSettings;
 }
 
 void UGJDimensionHandlerComponent::ApplyDimensionSettings(FDimensionSettings Settings)
 {
 	GetOwner()->SetActorHiddenInGame(Settings.bIsHidden);
 	GetOwner()->SetActorEnableCollision(!Settings.bDisableCollision);
+	CurrentDimensionSettings = Settings;
+}
+
+void UGJDimensionHandlerComponent::ChangeSettingsForDimension(EDimension Dimension, FDimensionSettings Settings)
+{
+	switch (Dimension)
+	{
+	case EDimension::NormalDimension:
+		NormalDimensionSettings = Settings;
+		break;
+	case EDimension::GhostDimension:
+		GhostDimensionSettings = Settings;
+		break;
+	}
 }
 
 void UGJDimensionHandlerComponent::OnDimensionSwitch_Implementation(EDimension NewDimension)
