@@ -32,6 +32,10 @@ void AGJMonsterCharacter::Attack()
 	UGJGameplayFunctionLibrary::DamageActor(this, PlayerCharacter, 25.0f);
 }
 
+void AGJMonsterCharacter::OnPickupCollected()
+{
+}
+
 void AGJMonsterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
