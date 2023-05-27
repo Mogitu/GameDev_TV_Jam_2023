@@ -2,8 +2,6 @@
 
 
 #include "Common/GJDimensionHandlerComponent.h"
-
-#include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
 #include "GameMode/GJGameMode.h"
 
 // Sets default values for this component's properties
@@ -24,10 +22,14 @@ void UGJDimensionHandlerComponent::SetDimensionSettings(EDimension NewDimension)
 	switch (NewDimension)
 	{
 	case EDimension::GhostDimension:
-		ApplyDimensionSettings(GhostDimensionSettings);
+		ApplyDimensionSettings(DimensionSettingsOverride != nullptr
+			                       ? DimensionSettingsOverride->GhostDimensionSettings
+			                       : GhostDimensionSettings);
 		break;
 	case EDimension::NormalDimension:
-		ApplyDimensionSettings(NormalDimensionSettings);
+		ApplyDimensionSettings(DimensionSettingsOverride != nullptr
+			                       ? DimensionSettingsOverride->NormalDimensionSettings
+			                       : NormalDimensionSettings);
 		break;
 	}
 }
@@ -35,6 +37,7 @@ void UGJDimensionHandlerComponent::SetDimensionSettings(EDimension NewDimension)
 void UGJDimensionHandlerComponent::ApplyDimensionSettings(FDimensionSettings Settings)
 {
 	GetOwner()->SetActorHiddenInGame(Settings.bIsHidden);
+	GetOwner()->SetActorEnableCollision(!Settings.bDisableCollision);
 }
 
 void UGJDimensionHandlerComponent::OnDimensionSwitch_Implementation(EDimension NewDimension)

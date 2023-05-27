@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Definitions.h"
 #include "Components/ActorComponent.h"
 #include "GameMode/GJGameMode.h"
 #include "GJDimensionHandlerComponent.generated.h"
@@ -13,15 +14,32 @@ struct FDimensionSettings
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DimensionSettings")
-	bool bIsHidden;		
+	bool bIsHidden;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="DimensionSettings")
+	bool bDisableCollision;
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(BlueprintType)
+class UDimensionSettingsData : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Dimension Settings")
+	FDimensionSettings NormalDimensionSettings;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Dimension Settings")
+	FDimensionSettings GhostDimensionSettings;
+};
+
+
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class GAMEJAM_2023_GDTV_API UGJDimensionHandlerComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UGJDimensionHandlerComponent();
 
@@ -41,7 +59,9 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Dimension")
 	FDimensionSettings GhostDimensionSettings;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Dimension")
+	TObjectPtr<UDimensionSettingsData> DimensionSettingsOverride;
+
 private:
 	void ApplyDimensionSettings(FDimensionSettings Settings);
-	
 };
