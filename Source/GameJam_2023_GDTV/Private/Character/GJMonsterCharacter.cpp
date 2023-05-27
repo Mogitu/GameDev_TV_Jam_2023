@@ -41,7 +41,7 @@ void AGJMonsterCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
+void AGJMonsterCharacter::OnHealthChanged_Implementation(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
                                           float Delta)
 {
 	if (NewHealth <= 0.0f && Delta < 0.0f)
