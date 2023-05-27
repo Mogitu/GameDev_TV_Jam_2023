@@ -52,12 +52,10 @@ void AGJRitualTable::TryPlaceWeaponPart(APawn* InstigatorPawn)
 				AActor* Spawned = GetWorld()->SpawnActorDeferred<AActor>(Item->PickupClass, Transform);
 				if (auto DimensionComponentPart = Spawned->GetComponentByClass<UGJDimensionHandlerComponent>())
 				{
-					if (auto OwnDimensionComp = GetComponentByClass<UGJDimensionHandlerComponent>())
-					{
-						DimensionComponentPart->ChangeSettingsForDimension(NormalDimension, {false, true});
-						DimensionComponentPart->ChangeSettingsForDimension(GhostDimension, {true, true});
-					}
+					DimensionComponentPart->ChangeSettingsForDimension(NormalDimension, {false, true});
+					DimensionComponentPart->ChangeSettingsForDimension(GhostDimension, {true, true});
 				}
+				Spawned->SetActorEnableCollision(false);
 				Spawned->FinishSpawning(Transform);
 				SpawnedParts.Add(Item->Name, Spawned);
 			}

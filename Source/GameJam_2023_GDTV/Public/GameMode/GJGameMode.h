@@ -24,6 +24,8 @@ class GAMEJAM_2023_GDTV_API AGJGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
+	AGJGameMode();
+
 	void OnActorKilled(AActor* Victim, AActor* Killer);
 
 	//Specifically change to a certain dimension
@@ -41,6 +43,15 @@ public:
 	FOnDimensionSwitch OnDimensionSwitch;
 
 protected:
+	UPROPERTY(EditDefaultsOnly, Category="Music")
+	float MusicFadeDuration;
+
+	UPROPERTY(VisibleAnywhere, Category="Music")
+	TObjectPtr<UAudioComponent> NormalAudioComp;
+
+	UPROPERTY(VisibleAnywhere, Category="Music")
+	TObjectPtr<UAudioComponent> GhostAudioComp;
+
 	void Init();
 
 	virtual void BeginPlay() override;
