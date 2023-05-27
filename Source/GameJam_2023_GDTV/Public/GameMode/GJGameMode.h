@@ -6,7 +6,14 @@
 #include "GameFramework/GameMode.h"
 #include "GJGameMode.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDimensionSwitch, bool, bGhostDimensionActive);
+UENUM()
+enum EDimension
+{
+	NormalDimension UMETA(DisplayName = "Normal Dimension"),
+	GhostDimension UMETA(DisplayName = "Ghost Dimension")	
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDimensionSwitch, EDimension, NewDimension);
 
 /**
  * 
@@ -17,20 +24,26 @@ class GAMEJAM_2023_GDTV_API AGJGameMode : public AGameMode
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable)
-	bool AllWeaponPartsCollected();
-
 	void OnActorKilled(AActor* Victim, AActor* Killer);
 
+	//Specifically change to a certain dimension
 	UFUNCTION(BlueprintCallable)
-	void SwapDimension();
+	void SwapDimension(EDimension NewDimension);
+
+	//just toggle back and forth between ghost and normal dimension
+	UFUNCTION(BlueprintCallable)
+	void ToggleDimension();
+
+	UFUNCTION(BlueprintCallable)
+	EDimension GetCurrentDimension() const;
 
 	UPROPERTY(BlueprintAssignable)
 	FOnDimensionSwitch OnDimensionSwitch;
 
-	UFUNCTION(BlueprintCallable)
-	bool GetGhostDimensionActive() const;
-
 protected:
+	virtual void BeginPlay() override;
+	
 	bool bGhostDimensionActive;
+
+	EDimension CurrentDimension;
 };

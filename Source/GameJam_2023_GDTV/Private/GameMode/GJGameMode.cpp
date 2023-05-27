@@ -2,16 +2,11 @@
 
 
 #include "GameMode/GJGameMode.h"
-
 #include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
-#include "Interaction/GJPickup.h"
-#include "Kismet/GameplayStatics.h"
 
-bool AGJGameMode::AllWeaponPartsCollected()
+void AGJGameMode::BeginPlay()
 {
-	TArray<AActor*> WeaponParts;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGJPickup::StaticClass(), WeaponParts);
-	return WeaponParts.Num() == 0;
+	Super::BeginPlay();
 }
 
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
@@ -19,13 +14,25 @@ void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
 }
 
-void AGJGameMode::SwapDimension()
+void AGJGameMode::SwapDimension(EDimension NewDimension)
 {
-	bGhostDimensionActive = !bGhostDimensionActive;
-	OnDimensionSwitch.Broadcast(bGhostDimensionActive);
+	CurrentDimension = NewDimension;
+	OnDimensionSwitch.Broadcast(CurrentDimension);
 }
 
-bool AGJGameMode::GetGhostDimensionActive() const
+void AGJGameMode::ToggleDimension()
 {
-	return bGhostDimensionActive; 
+	if (CurrentDimension == NormalDimension)
+	{
+		SwapDimension(GhostDimension);
+	}
+	else
+	{
+		SwapDimension(NormalDimension);
+	}
+}
+
+EDimension AGJGameMode::GetCurrentDimension() const
+{
+	return CurrentDimension;
 }
