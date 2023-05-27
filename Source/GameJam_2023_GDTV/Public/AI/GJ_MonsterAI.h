@@ -21,6 +21,8 @@ public:
 
 	AGJ_MonsterAI();
 	virtual void Tick(float DeltaSeconds) override;
+
+	UINT SetSpeedTime;
 	
 protected:
 	virtual void BeginPlay() override;
