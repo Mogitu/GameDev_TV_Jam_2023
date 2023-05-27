@@ -2,6 +2,7 @@
 
 #include "AIController.h"
 #include "BrainComponent.h"
+#include "Common/GJGameplayFunctionLibrary.h"
 #include "Common/GJHealthComponent.h"
 #include "Character/GJPlayerCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -9,6 +10,7 @@
 AGJMonsterCharacter::AGJMonsterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
 	
 	
 }
@@ -16,17 +18,18 @@ AGJMonsterCharacter::AGJMonsterCharacter()
 void AGJMonsterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	SpeedFactor = 1.25f;
-	BaseSpeed = 300.0f;
 
-	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
+	SetSpeed(BaseSpeed);
 }
 
 void AGJMonsterCharacter::Attack()
 {
 	// Print "Player Attacked!"
 	UE_LOG(LogTemp, Warning, TEXT("Player Attacked!"));
-	IncreaseSpeed();
+	// Get the player character reference
+	AActor* PlayerCharacter = GetWorld()->GetFirstPlayerController()->GetPawn();
+	// Get Player's Max Health
+	UGJGameplayFunctionLibrary::DamageActor(this, PlayerCharacter, 25.0f);
 }
 
 void AGJMonsterCharacter::Tick(float DeltaTime)
@@ -48,17 +51,28 @@ void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComp
 	}
 }
 
-void AGJMonsterCharacter::IncreaseSpeed()
+void AGJMonsterCharacter::SetSpeed(float Speed)
 {
-	BaseSpeed *= SpeedFactor;
-	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed;
+	GetCharacterMovement()->MaxWalkSpeed = Speed;
 }
 
-void AGJMonsterCharacter::OnPickupCollected()
+void AGJMonsterCharacter::SetBaseSpeed(float Speed)
 {
+	BaseSpeed = Speed;
 }
 
+float AGJMonsterCharacter::GetSpeed()
+{
+	return GetCharacterMovement()->MaxWalkSpeed;
+}
+
+float AGJMonsterCharacter::GetBaseSpeed()
+{
+	return BaseSpeed;
+}
 AGJMonsterCharacter* AGJMonsterCharacter::GetMonsterCharacterReference()
 {
 	return this;
 }
+
+
