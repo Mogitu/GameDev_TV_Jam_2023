@@ -35,7 +35,7 @@ private:
 	
 
 protected:
-	virtual void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
+	virtual void OnHealthChanged_Implementation(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
 	                             float Delta) override;
 
 	

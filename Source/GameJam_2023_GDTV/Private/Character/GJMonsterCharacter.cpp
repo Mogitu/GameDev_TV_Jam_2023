@@ -10,9 +10,6 @@
 AGJMonsterCharacter::AGJMonsterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
-	
-	
 }
 
 void AGJMonsterCharacter::BeginPlay()
@@ -32,13 +29,18 @@ void AGJMonsterCharacter::Attack()
 	UGJGameplayFunctionLibrary::DamageActor(this, PlayerCharacter, 25.0f);
 }
 
+void AGJMonsterCharacter::OnPickupCollected()
+{
+}
+
 void AGJMonsterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
 
-void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
-                                          float Delta)
+void AGJMonsterCharacter::OnHealthChanged_Implementation(AActor* InstigatorActor, UGJHealthComponent* OwningComp,
+                                                         float NewHealth,
+                                                         float Delta)
 {
 	if (NewHealth <= 0.0f && Delta < 0.0f)
 	{
@@ -47,7 +49,7 @@ void AGJMonsterCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComp
 		{
 			AIC->GetBrainComponent()->StopLogic("Killed");
 		}
-		Destroy();
+		SetActorEnableCollision(false);
 	}
 }
 
@@ -70,9 +72,8 @@ float AGJMonsterCharacter::GetBaseSpeed()
 {
 	return BaseSpeed;
 }
+
 AGJMonsterCharacter* AGJMonsterCharacter::GetMonsterCharacterReference()
 {
 	return this;
 }
-
-

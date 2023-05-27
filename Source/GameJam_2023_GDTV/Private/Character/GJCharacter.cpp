@@ -20,7 +20,7 @@ void AGJCharacter::PostInitializeComponents()
 	HealthComponent->OnHealthChanged.AddDynamic(this, &AGJCharacter::OnHealthChanged);
 }
 
-void AGJCharacter::OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
-                                   float Delta)
+void AGJCharacter::OnHealthChanged_Implementation(AActor* InstigatorActor, UGJHealthComponent* OwningComp,
+                                                  float NewHealth, float Delta)
 {
 }
