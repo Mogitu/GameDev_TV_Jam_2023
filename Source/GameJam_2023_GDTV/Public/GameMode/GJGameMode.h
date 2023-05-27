@@ -10,7 +10,7 @@ UENUM()
 enum EDimension
 {
 	NormalDimension UMETA(DisplayName = "Normal Dimension"),
-	GhostDimension UMETA(DisplayName = "Ghost Dimension")	
+	GhostDimension UMETA(DisplayName = "Ghost Dimension")
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDimensionSwitch, EDimension, NewDimension);
@@ -28,7 +28,7 @@ public:
 
 	//Specifically change to a certain dimension
 	UFUNCTION(BlueprintCallable)
-	void SwapDimension(EDimension NewDimension);
+	void SetDimension(EDimension NewDimension);
 
 	//just toggle back and forth between ghost and normal dimension
 	UFUNCTION(BlueprintCallable)
@@ -41,9 +41,9 @@ public:
 	FOnDimensionSwitch OnDimensionSwitch;
 
 protected:
+	void Init();
+
 	virtual void BeginPlay() override;
-	
-	bool bGhostDimensionActive;
 
 	EDimension CurrentDimension;
 };

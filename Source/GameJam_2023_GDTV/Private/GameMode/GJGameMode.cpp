@@ -7,14 +7,21 @@
 void AGJGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+	GetWorld()->OnWorldBeginPlay.AddUObject(this, &AGJGameMode::Init);
 }
+
+void AGJGameMode::Init()
+{
+	SetDimension(NormalDimension);
+}
+
 
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
 	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
 }
 
-void AGJGameMode::SwapDimension(EDimension NewDimension)
+void AGJGameMode::SetDimension(EDimension NewDimension)
 {
 	CurrentDimension = NewDimension;
 	OnDimensionSwitch.Broadcast(CurrentDimension);
@@ -24,11 +31,11 @@ void AGJGameMode::ToggleDimension()
 {
 	if (CurrentDimension == NormalDimension)
 	{
-		SwapDimension(GhostDimension);
+		SetDimension(GhostDimension);
 	}
 	else
 	{
-		SwapDimension(NormalDimension);
+		SetDimension(NormalDimension);
 	}
 }
 
