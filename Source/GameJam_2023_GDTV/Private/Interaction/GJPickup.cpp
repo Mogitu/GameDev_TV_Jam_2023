@@ -31,7 +31,8 @@ void AGJPickup::Interact_Implementation(APawn* InstigatorPawn)
 
 		if (MonsterReference != nullptr)
 		{
-			MonsterReference->IncreaseSpeed();
+			MonsterReference->SetSpeed(MonsterReference->GetSpeed() + 30.0f);
+			MonsterReference->SetBaseSpeed(MonsterReference->GetBaseSpeed() + 30.0f);
 		}
 	}
 	Destroy();

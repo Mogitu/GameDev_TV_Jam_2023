@@ -18,28 +18,25 @@ public:
 	AGJMonsterCharacter();
 	AGJMonsterCharacter* GetMonsterCharacterReference();
 	void Attack();
-	void IncreaseSpeed();
+	void SetSpeed(float Speed);
+	void SetBaseSpeed(float Speed);
+	float GetSpeed();
+	float GetBaseSpeed();
+
+
+	float BaseSpeed = 300.f;
 
 	UFUNCTION()
 	void OnPickupCollected();
 
 private:
 	virtual void Tick(float DeltaTime) override;
-	//OnBeginPlay
 	virtual void BeginPlay() override;
 	
 
 protected:
 	virtual void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
 	                             float Delta) override;
-
-
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Monster")
-	float SpeedFactor;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Monster")
-	float BaseSpeed;
 
 	
 };
