@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Weapon/GJWeapon.h"
+
+#include "Blueprint/UserWidget.h"
 #include "Common/GJGameplayFunctionLibrary.h"
 #include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
 #include "Kismet/GameplayStatics.h"
@@ -33,6 +35,11 @@ void AGJWeapon::Equip(AActor* ActorThatEquips, USceneComponent* Comp)
 	GetWeaponMesh()->SetSimulatePhysics(false);
 	SetActorEnableCollision(false);
 	GetRootComponent()->AttachToComponent(Comp, FAttachmentTransformRules::SnapToTargetIncludingScale);
+	if (WeaponDisplayWidgetClass)
+	{
+		WeaponDisplayWidgetInstance = CreateWidget<UUserWidget>(GetWorld(), WeaponDisplayWidgetClass);
+		WeaponDisplayWidgetInstance->AddToViewport();
+	}
 }
 
 void AGJWeapon::Fire()
@@ -57,18 +64,20 @@ void AGJWeapon::Fire()
 		UGJGameplayFunctionLibrary::DamageActor(OwningCharacter, HitActor, DamageAmount);
 	}
 	DepleteAmmo(1);
+	if (FireSound)
+	{
+		UGameplayStatics::SpawnSoundAttached(FireSound, GetRootComponent());
+	}
 }
 
 void AGJWeapon::AddAmmo(int32 Amount)
 {
 	CurrentAmmo = FMath::Clamp(CurrentAmmo + Amount, 0, MaxAmmo);
+	OnAmmoChanged.Broadcast(CurrentAmmo);
 }
 
 void AGJWeapon::DepleteAmmo(int32 Amount)
 {
 	CurrentAmmo = FMath::Clamp(CurrentAmmo - Amount, 0, MaxAmmo);
-	if(FireSound)
-	{
-		UGameplayStatics::SpawnSoundAttached(FireSound, GetRootComponent());	
-	}	
+	OnAmmoChanged.Broadcast(CurrentAmmo);
 }
