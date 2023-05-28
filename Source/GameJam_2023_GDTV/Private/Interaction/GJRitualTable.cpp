@@ -52,8 +52,17 @@ void AGJRitualTable::TryPlaceWeaponPart(APawn* InstigatorPawn)
 				AActor* Spawned = GetWorld()->SpawnActorDeferred<AActor>(Item->PickupClass, Transform);
 				if (auto DimensionComponentPart = Spawned->GetComponentByClass<UGJDimensionHandlerComponent>())
 				{
-					DimensionComponentPart->ChangeSettingsForDimension(NormalDimension, {false, true});
-					DimensionComponentPart->ChangeSettingsForDimension(GhostDimension, {true, true});
+					auto OwnDim = GetComponentByClass<UGJDimensionHandlerComponent>();
+					DimensionComponentPart->ChangeSettingsForDimension(NormalDimension, {
+						                                                   OwnDim->GetNormalDimensionSettings().
+						                                                   bIsHidden,
+						                                                   true
+					                                                   });
+					DimensionComponentPart->ChangeSettingsForDimension(GhostDimension, {
+						                                                   OwnDim->GetGhostDimensionSettings().
+						                                                   bIsHidden,
+						                                                   true
+					                                                   });
 				}
 				Spawned->SetActorEnableCollision(false);
 				Spawned->FinishSpawning(Transform);
@@ -79,8 +88,8 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 		{
 			if (auto OwnDimensionComp = GetComponentByClass<UGJDimensionHandlerComponent>())
 			{
-				WeaponDimensionComp->ChangeSettingsForDimension(GhostDimension, {true, true});
-				WeaponDimensionComp->ChangeSettingsForDimension(NormalDimension, {false, false});
+				WeaponDimensionComp->ChangeSettingsForDimension(GhostDimension, { OwnDimensionComp->GetGhostDimensionSettings().bIsHidden, true});
+				WeaponDimensionComp->ChangeSettingsForDimension(NormalDimension, {OwnDimensionComp->GetNormalDimensionSettings().bIsHidden, false});
 			}
 		}
 		DisableAltar();

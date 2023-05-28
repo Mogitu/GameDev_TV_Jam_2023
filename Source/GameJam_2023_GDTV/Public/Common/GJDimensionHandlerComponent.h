@@ -58,6 +58,12 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FDimensionSettings GetCurrentDimensionSettings() const;
 
+	UFUNCTION(BlueprintCallable)
+	FDimensionSettings GetGhostDimensionSettings() const;
+
+	UFUNCTION(BlueprintCallable)
+	FDimensionSettings GetNormalDimensionSettings() const;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
