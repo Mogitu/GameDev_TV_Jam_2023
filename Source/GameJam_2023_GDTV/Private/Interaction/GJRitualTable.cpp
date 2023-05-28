@@ -5,6 +5,7 @@
 
 #include "Definitions.h"
 #include "Character/GJInventoryComponent.h"
+#include "Common/GJDimensionHandlerComponent.h"
 
 AGJRitualTable::AGJRitualTable()
 {
@@ -48,9 +49,14 @@ void AGJRitualTable::TryPlaceWeaponPart(APawn* InstigatorPawn)
 			if (auto Item = Inventory->GetDataWithKey(Pair.Key))
 			{
 				FTransform Transform = Pair.Value;
-				AActor* Spawned = GetWorld()->SpawnActor<AActor>(Item->PickupClass, Transform.GetLocation(),
-				                                                 Transform.GetRotation().Rotator());
+				AActor* Spawned = GetWorld()->SpawnActorDeferred<AActor>(Item->PickupClass, Transform);
+				if (auto DimensionComponentPart = Spawned->GetComponentByClass<UGJDimensionHandlerComponent>())
+				{
+					DimensionComponentPart->ChangeSettingsForDimension(NormalDimension, {false, true});
+					DimensionComponentPart->ChangeSettingsForDimension(GhostDimension, {true, true});
+				}
 				Spawned->SetActorEnableCollision(false);
+				Spawned->FinishSpawning(Transform);
 				SpawnedParts.Add(Item->Name, Spawned);
 			}
 		}
@@ -64,16 +70,26 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 
 	if (AllPartsCollected())
 	{
+		Super::Interact_Implementation(InstigatorPawn);
+		FTransform Transform(GetActorRotation(), GetActorLocation() + FVector::UpVector * 200);
+
 		//spawn the weapon
-		GetWorld()->SpawnActor<AActor>(WeaponToSpawnClass,
-		                               GetActorLocation() + FVector::UpVector * 200,
-		                               GetActorRotation());
+		AActor* WeaponSpawn = GetWorld()->SpawnActorDeferred<AActor>(WeaponToSpawnClass, Transform);
+		if (auto WeaponDimensionComp = WeaponSpawn->GetComponentByClass<UGJDimensionHandlerComponent>())
+		{
+			if (auto OwnDimensionComp = GetComponentByClass<UGJDimensionHandlerComponent>())
+			{
+				WeaponDimensionComp->ChangeSettingsForDimension(GhostDimension, {true, true});
+				WeaponDimensionComp->ChangeSettingsForDimension(NormalDimension, {false, false});
+			}
+		}
 		DisableAltar();
 		ClearCollectedParts();
+
 		bWeaponSpawned = true;
+		WeaponSpawn->FinishSpawning(Transform);
 		return;
 	}
-
 	TryPlaceWeaponPart(InstigatorPawn);
 }
 

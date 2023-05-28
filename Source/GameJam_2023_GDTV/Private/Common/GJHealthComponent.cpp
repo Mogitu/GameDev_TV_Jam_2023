@@ -60,3 +60,8 @@ float UGJHealthComponent::GetHealthFraction() const
 	float Fraction = Health / MaxHealth;
 	return FMathf::Clamp(Fraction, 0, 1);
 }
+
+bool UGJHealthComponent::IsDead() const
+{
+	return Health <= 0.0f;
+}

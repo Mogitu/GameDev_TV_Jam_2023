@@ -16,12 +16,27 @@ class GAMEJAM_2023_GDTV_API AGJMonsterCharacter : public AGJCharacter
 
 public:
 	AGJMonsterCharacter();
+	AGJMonsterCharacter* GetMonsterCharacterReference();
 	void Attack();
+	void SetSpeed(float Speed);
+	void SetBaseSpeed(float Speed);
+	float GetSpeed();
+	float GetBaseSpeed();
+
+
+	float BaseSpeed = 300.f;
+
+	UFUNCTION()
+	void OnPickupCollected();
 
 private:
 	virtual void Tick(float DeltaTime) override;
+	virtual void BeginPlay() override;
+	
 
 protected:
-	virtual void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
+	virtual void OnHealthChanged_Implementation(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth,
 	                             float Delta) override;
+
+	
 };

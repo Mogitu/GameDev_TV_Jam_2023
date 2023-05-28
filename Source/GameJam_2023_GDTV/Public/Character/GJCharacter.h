@@ -20,8 +20,8 @@ public:
 protected:
 	virtual void PostInitializeComponents() override;
 
-	UFUNCTION()
-	virtual void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth, float Delta);
+	UFUNCTION(BlueprintCallable,BlueprintNativeEvent)
+	void OnHealthChanged(AActor* InstigatorActor, UGJHealthComponent* OwningComp, float NewHealth, float Delta);
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UGJHealthComponent> HealthComponent;

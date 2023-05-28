@@ -54,6 +54,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void EquipWeapon(AGJWeapon* WeaponToEquip);
 
+	UFUNCTION(BlueprintCallable)
+	AGJWeapon* GetEquipedWeapon() const;
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 

@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "GJWeapon.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAmmoChanged, int32, NewAmmo);
+
 UCLASS()
 class GAMEJAM_2023_GDTV_API AGJWeapon : public AActor
 {
@@ -24,10 +26,40 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	UFUNCTION(BlueprintCallable)
+	void AddAmmo(int32 Amount);
+
+	UFUNCTION(BlueprintCallable)
+	void DepleteAmmo(int32 Amount);
+
+	UPROPERTY(BlueprintAssignable)
+	FOnAmmoChanged OnAmmoChanged;
+
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
-	float ShotDistance;	
+	FName BarrelSocketName;
 	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	UParticleSystem* ShootEffect;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	UParticleSystem* BloodEffect;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	UParticleSystem* NormalHitEffect;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	TSubclassOf<UUserWidget> WeaponDisplayWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UUserWidget> WeaponDisplayWidgetInstance;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	USoundBase* FireSound;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
+	float ShotDistance;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapon")
 	int32 MaxAmmo;
 

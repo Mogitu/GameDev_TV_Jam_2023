@@ -3,15 +3,18 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GJInteractableActor.h"
 #include "GJInteractionInterface.h"
 #include "GameFramework/Actor.h"
+#include "character/GJMonsterCharacter.h"
 #include "GJPickup.generated.h"
+
 
 class UPickupData;
 class USphereComponent;
 
 UCLASS()
-class GAMEJAM_2023_GDTV_API AGJPickup : public AActor, public IGJInteractionInterface
+class GAMEJAM_2023_GDTV_API AGJPickup : public AGJInteractableActor
 {
 	GENERATED_BODY()
 
@@ -29,4 +32,8 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category="Pickup")
 	TObjectPtr<UStaticMeshComponent> PickupMesh;
+
+private:
+	UPROPERTY(EditAnywhere, Category="Pickup")
+	AGJMonsterCharacter* MonsterReference;
 };

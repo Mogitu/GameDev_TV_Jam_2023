@@ -35,9 +35,6 @@ protected:
 
 private:
 	UPROPERTY()
-	TArray<TObjectPtr<USceneComponent>> PartHolders;
-
-	UPROPERTY()
 	TMap<FName, TObjectPtr<AActor>> SpawnedParts;
 
 	UPROPERTY()
