@@ -4,6 +4,7 @@
 #include "GameMode/GJGameMode.h"
 
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
 #include "Character/GJMonsterCharacter.h"
 #include "Character/GJPlayerCharacter.h"
 #include "Components/AudioComponent.h"
@@ -27,6 +28,11 @@ void AGJGameMode::OnGameEnd()
 {
 	if (WidgetClassToSpawn)
 	{
+		APlayerController* Controller = GetWorld()->GetFirstPlayerController();
+		UWidgetLayoutLibrary::RemoveAllWidgets(GetWorld());
+		Controller->StopMovement();
+		Controller->SetInputMode(FInputModeUIOnly());
+		Controller->SetShowMouseCursor(true);
 		auto Widget = CreateWidget(GetWorld(), WidgetClassToSpawn);
 		Widget->AddToViewport();
 	}
