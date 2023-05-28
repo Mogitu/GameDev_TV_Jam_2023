@@ -52,9 +52,23 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category="Music")
 	TObjectPtr<UAudioComponent> GhostAudioComp;
 
+	UPROPERTY(EditDefaultsOnly, Category="GameEnd")
+	TSubclassOf<UUserWidget> GameOverWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category="GameEnd")
+	TSubclassOf<UUserWidget> GameWinWidgetClass;
+
 	void Init();
 
 	virtual void BeginPlay() override;
 
+private:
+	UFUNCTION()
+	void OnGameEnd();
+	
 	EDimension CurrentDimension;
+
+	FTimerHandle GameEndTimerHandle;
+
+	TSubclassOf<UUserWidget> WidgetClassToSpawn;
 };
