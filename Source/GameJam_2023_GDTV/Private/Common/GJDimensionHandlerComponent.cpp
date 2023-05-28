@@ -40,6 +40,16 @@ FDimensionSettings UGJDimensionHandlerComponent::GetCurrentDimensionSettings() c
 	return CurrentDimensionSettings;
 }
 
+FDimensionSettings UGJDimensionHandlerComponent::GetGhostDimensionSettings() const
+{
+	return GhostDimensionSettings;
+}
+
+FDimensionSettings UGJDimensionHandlerComponent::GetNormalDimensionSettings() const
+{
+	return NormalDimensionSettings;
+}
+
 void UGJDimensionHandlerComponent::ApplyDimensionSettings(FDimensionSettings Settings)
 {
 	GetOwner()->SetActorHiddenInGame(Settings.bIsHidden);
