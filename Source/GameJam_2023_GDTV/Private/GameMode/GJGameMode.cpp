@@ -62,7 +62,7 @@ void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 		}
 	}
 
-	GetWorldTimerManager().SetTimer(GameEndTimerHandle, this, &AGJGameMode::OnGameEnd, 5, false);
+	GetWorldTimerManager().SetTimer(GameEndTimerHandle, this, &AGJGameMode::OnGameEnd, 3, false);
 }
 
 void AGJGameMode::SetDimension(EDimension NewDimension)
