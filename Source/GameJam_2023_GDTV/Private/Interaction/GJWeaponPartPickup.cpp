@@ -3,18 +3,14 @@
 
 #include "Interaction/GJWeaponPartPickup.h"
 
-#include "GameMode/GJGameMode.h"
+#include "Common/GJDimensionHandlerComponent.h"
+
+AGJWeaponPartPickup::AGJWeaponPartPickup()
+{
+	DimensionHandlerComponent = CreateDefaultSubobject<UGJDimensionHandlerComponent>(TEXT("DimensionHandler"));
+}
 
 void AGJWeaponPartPickup::BeginPlay()
 {
 	Super::BeginPlay();
-	AGJGameMode*  Mode =  GetWorld()->GetAuthGameMode<AGJGameMode>();
-	Mode->OnDimensionSwitch.AddDynamic(this, &AGJWeaponPartPickup::OnDimensionSwitch);
-
-	SetActorHiddenInGame(bInitiallyEnabled);
-}
-
-void AGJWeaponPartPickup::OnDimensionSwitch(bool bGhostDimensionActive)
-{
-	SetActorHiddenInGame(bGhostDimensionActive != bInitiallyEnabled);
 }

@@ -34,6 +34,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	float GetHealthFraction() const;
 
+	UFUNCTION(BlueprintCallable)
+	bool IsDead()const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category="Health")
 	float Health;

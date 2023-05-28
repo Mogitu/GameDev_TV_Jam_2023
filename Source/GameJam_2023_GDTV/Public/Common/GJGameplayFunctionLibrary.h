@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameMode/GJGameMode.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GJGameplayFunctionLibrary.generated.h"
 

@@ -3,29 +3,91 @@
 
 #include "GameMode/GJGameMode.h"
 
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Character/GJMonsterCharacter.h"
+#include "Character/GJPlayerCharacter.h"
+#include "Components/AudioComponent.h"
 #include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
-#include "Interaction/GJPickup.h"
-#include "Kismet/GameplayStatics.h"
 
-bool AGJGameMode::AllWeaponPartsCollected()
+AGJGameMode::AGJGameMode()
 {
-	TArray<AActor*> WeaponParts;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGJPickup::StaticClass(), WeaponParts);
-	return WeaponParts.Num() == 0;
+	NormalAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("NormalAudioComp"));
+	GhostAudioComp = CreateDefaultSubobject<UAudioComponent>(TEXT("GhostAudioComp"));
+	MusicFadeDuration = 3;
+}
+
+void AGJGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+	GhostAudioComp->FadeOut(0, 0);
+	GetWorld()->OnWorldBeginPlay.AddUObject(this, &AGJGameMode::Init);
+}
+
+void AGJGameMode::OnGameEnd()
+{
+	if (WidgetClassToSpawn)
+	{
+		APlayerController* Controller = GetWorld()->GetFirstPlayerController();
+		UWidgetLayoutLibrary::RemoveAllWidgets(GetWorld());
+		Controller->StopMovement();
+		Controller->SetInputMode(FInputModeUIOnly());
+		Controller->SetShowMouseCursor(true);
+		auto Widget = CreateWidget(GetWorld(), WidgetClassToSpawn);
+		Widget->AddToViewport();
+	}
+}
+
+void AGJGameMode::Init()
+{
+	SetDimension(NormalDimension);
 }
 
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
 	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
+
+	if (auto PlayerCharacter = Cast<AGJPlayerCharacter>(Victim))
+	{
+		if (GameOverWidgetClass)
+		{
+			WidgetClassToSpawn = GameOverWidgetClass;
+		}
+	}
+	else if (auto MonsterCharacter = Cast<AGJMonsterCharacter>(Victim))
+	{
+		if (GameWinWidgetClass)
+		{
+			WidgetClassToSpawn = GameWinWidgetClass;
+		}
+	}
+
+	GetWorldTimerManager().SetTimer(GameEndTimerHandle, this, &AGJGameMode::OnGameEnd, 3, false);
 }
 
-void AGJGameMode::SwapDimension()
+void AGJGameMode::SetDimension(EDimension NewDimension)
 {
-	bGhostDimensionActive = !bGhostDimensionActive;
-	OnDimensionSwitch.Broadcast(bGhostDimensionActive);
+	CurrentDimension = NewDimension;
+	OnDimensionSwitch.Broadcast(CurrentDimension);
 }
 
-bool AGJGameMode::GetGhostDimensionActive() const
+void AGJGameMode::ToggleDimension()
 {
-	return bGhostDimensionActive; 
+	if (CurrentDimension == NormalDimension)
+	{
+		SetDimension(GhostDimension);
+		NormalAudioComp->FadeOut(MusicFadeDuration, 0);
+		GhostAudioComp->FadeIn(MusicFadeDuration, 1);
+	}
+	else
+	{
+		SetDimension(NormalDimension);
+		NormalAudioComp->FadeIn(MusicFadeDuration, 1);
+		GhostAudioComp->FadeOut(MusicFadeDuration, 0);
+	}
+}
+
+EDimension AGJGameMode::GetCurrentDimension() const
+{
+	return CurrentDimension;
 }
