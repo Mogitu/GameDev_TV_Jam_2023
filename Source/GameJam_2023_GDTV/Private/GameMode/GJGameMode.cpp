@@ -3,6 +3,10 @@
 
 #include "GameMode/GJGameMode.h"
 
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Character/GJMonsterCharacter.h"
+#include "Character/GJPlayerCharacter.h"
 #include "Components/AudioComponent.h"
 #include "GameJam_2023_GDTV/GameJam_2023_GDTV.h"
 
@@ -20,6 +24,20 @@ void AGJGameMode::BeginPlay()
 	GetWorld()->OnWorldBeginPlay.AddUObject(this, &AGJGameMode::Init);
 }
 
+void AGJGameMode::OnGameEnd()
+{
+	if (WidgetClassToSpawn)
+	{
+		APlayerController* Controller = GetWorld()->GetFirstPlayerController();
+		UWidgetLayoutLibrary::RemoveAllWidgets(GetWorld());
+		Controller->StopMovement();
+		Controller->SetInputMode(FInputModeUIOnly());
+		Controller->SetShowMouseCursor(true);
+		auto Widget = CreateWidget(GetWorld(), WidgetClassToSpawn);
+		Widget->AddToViewport();
+	}
+}
+
 void AGJGameMode::Init()
 {
 	SetDimension(NormalDimension);
@@ -28,6 +46,23 @@ void AGJGameMode::Init()
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
 	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
+
+	if (auto PlayerCharacter = Cast<AGJPlayerCharacter>(Victim))
+	{
+		if (GameOverWidgetClass)
+		{
+			WidgetClassToSpawn = GameOverWidgetClass;
+		}
+	}
+	else if (auto MonsterCharacter = Cast<AGJMonsterCharacter>(Victim))
+	{
+		if (GameWinWidgetClass)
+		{
+			WidgetClassToSpawn = GameWinWidgetClass;
+		}
+	}
+
+	GetWorldTimerManager().SetTimer(GameEndTimerHandle, this, &AGJGameMode::OnGameEnd, 5, false);
 }
 
 void AGJGameMode::SetDimension(EDimension NewDimension)
