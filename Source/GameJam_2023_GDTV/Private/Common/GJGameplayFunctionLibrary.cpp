@@ -2,7 +2,10 @@
 
 
 #include "Common/GJGameplayFunctionLibrary.h"
+
+#include "Blueprint/UserWidget.h"
 #include "Common/GJHealthComponent.h"
+#include "Widget/GJUserWidget.h"
 
 bool UGJGameplayFunctionLibrary::DamageActor(AActor* DamageCauser, AActor* TargetActor, float DamageAmount)
 {
@@ -22,4 +25,13 @@ bool UGJGameplayFunctionLibrary::HealActor(AActor* HealerActor, AActor* TargetAc
 		return true;
 	}
 	return false;
+}
+
+UGJPopupWidget* UGJGameplayFunctionLibrary::CreatePopup(APlayerController* Owner, TSubclassOf<UGJPopupWidget> WidgetClass, FText Text,
+	float Duration)
+{
+	UGJPopupWidget* Widget = CreateWidget<UGJPopupWidget>(Owner, WidgetClass);
+	Widget->SetPopupText(Text);
+	Widget->StartTimer(Duration);
+	return Widget;
 }
