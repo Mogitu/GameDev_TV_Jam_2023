@@ -2,8 +2,6 @@
 
 
 #include "Common/GJHealthComponent.h"
-
-#include "CookerSettings.h"
 #include "MathUtil.h"
 #include "GameMode/GJGameMode.h"
 

@@ -6,6 +6,7 @@
 #include "Definitions.h"
 #include "Character/GJInventoryComponent.h"
 #include "Common/GJDimensionHandlerComponent.h"
+#include "Common/GJGameplayFunctionLibrary.h"
 
 AGJRitualTable::AGJRitualTable()
 {
@@ -42,6 +43,14 @@ void AGJRitualTable::TryPlaceWeaponPart(APawn* InstigatorPawn)
 {
 	if (auto Inventory = InstigatorPawn->GetComponentByClass<UGJInventoryComponent>())
 	{
+		if (Inventory->GetCollectedItems().IsEmpty())
+		{
+			auto Widget = UGJGameplayFunctionLibrary::CreatePopup(GetWorld()->GetFirstPlayerController(),
+			                                                      PopupWidgetClass,
+			                                                      FText::FromString("Collect weapon parts first"));
+			Widget->AddToViewport();
+			return;
+		}
 		for (auto Pair : SocketTransforms)
 		{
 			if (SpawnedParts.Contains(Pair.Key))continue;
@@ -88,8 +97,16 @@ void AGJRitualTable::Interact_Implementation(APawn* InstigatorPawn)
 		{
 			if (auto OwnDimensionComp = GetComponentByClass<UGJDimensionHandlerComponent>())
 			{
-				WeaponDimensionComp->ChangeSettingsForDimension(GhostDimension, { OwnDimensionComp->GetGhostDimensionSettings().bIsHidden, true});
-				WeaponDimensionComp->ChangeSettingsForDimension(NormalDimension, {OwnDimensionComp->GetNormalDimensionSettings().bIsHidden, false});
+				WeaponDimensionComp->ChangeSettingsForDimension(GhostDimension, {
+					                                                OwnDimensionComp->GetGhostDimensionSettings().
+					                                                bIsHidden,
+					                                                true
+				                                                });
+				WeaponDimensionComp->ChangeSettingsForDimension(NormalDimension, {
+					                                                OwnDimensionComp->GetNormalDimensionSettings().
+					                                                bIsHidden,
+					                                                false
+				                                                });
 			}
 		}
 		DisableAltar();

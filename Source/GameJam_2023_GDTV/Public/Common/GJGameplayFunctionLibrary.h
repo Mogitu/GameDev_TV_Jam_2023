@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameMode/GJGameMode.h"
+#include "Widget/GJPopupWidget.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "GJGameplayFunctionLibrary.generated.h"
 
@@ -21,4 +21,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Gameplay")
 	static bool HealActor(AActor* HealerActor, AActor* TargetActor, float HealAmount);
+
+	UFUNCTION(BlueprintCallable, Category = "Gameplay")
+	static UGJPopupWidget* CreatePopup(APlayerController* Owner, TSubclassOf<UGJPopupWidget> WidgetClass, FText Text, float Duration = 3.0f);
 };
