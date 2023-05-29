@@ -6,6 +6,7 @@
 #include "Interaction/GJInteractableActor.h"
 #include "GJRitualTable.generated.h"
 
+class UGJPopupWidget;
 /**
  * 
  */
@@ -32,6 +33,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ritual")
 	TSubclassOf<AActor> WeaponToSpawnClass;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Ritual")
+	TSubclassOf<UGJPopupWidget> PopupWidgetClass;
 
 private:
 	UPROPERTY()
