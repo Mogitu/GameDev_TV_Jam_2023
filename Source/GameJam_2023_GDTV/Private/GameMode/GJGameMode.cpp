@@ -30,10 +30,11 @@ void AGJGameMode::OnGameEnd()
 	{
 		APlayerController* Controller = GetWorld()->GetFirstPlayerController();
 		UWidgetLayoutLibrary::RemoveAllWidgets(GetWorld());
-		Controller->StopMovement();
+		Controller->StopMovement();		
 		Controller->SetInputMode(FInputModeUIOnly());
 		Controller->SetShowMouseCursor(true);
 		auto Widget = CreateWidget(GetWorld(), WidgetClassToSpawn);
+		Controller->UnPossess();
 		Widget->AddToViewport();
 	}
 }
