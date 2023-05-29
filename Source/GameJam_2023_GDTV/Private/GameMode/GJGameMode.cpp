@@ -45,7 +45,7 @@ void AGJGameMode::Init()
 
 void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 {
-	LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
+	//LogOnScreen(GetWorld(), Victim->GetName() + " was killed by " + Killer->GetName());
 
 	if (auto PlayerCharacter = Cast<AGJPlayerCharacter>(Victim))
 	{
