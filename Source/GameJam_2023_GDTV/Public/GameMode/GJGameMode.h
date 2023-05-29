@@ -6,8 +6,8 @@
 #include "GameFramework/GameMode.h"
 #include "GJGameMode.generated.h"
 
-UENUM()
-enum EDimension
+UENUM(BlueprintType)
+enum EDimension : uint8
 {
 	NormalDimension UMETA(DisplayName = "Normal Dimension"),
 	GhostDimension UMETA(DisplayName = "Ghost Dimension")
