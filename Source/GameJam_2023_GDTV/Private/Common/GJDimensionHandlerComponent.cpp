@@ -54,6 +54,15 @@ void UGJDimensionHandlerComponent::ApplyDimensionSettings(FDimensionSettings Set
 {
 	GetOwner()->SetActorHiddenInGame(Settings.bIsHidden);
 	GetOwner()->SetActorEnableCollision(!Settings.bDisableCollision);
+	TArray<UStaticMeshComponent*> Children;
+	GetOwner()->GetComponents(Children);
+	for (auto Child : Children)
+	{
+		Child->SetHiddenInGame(Settings.bIsHidden);
+		Child->SetCollisionEnabled(!Settings.bDisableCollision
+			                           ? ECollisionEnabled::QueryOnly
+			                           : ECollisionEnabled::NoCollision);	
+	}
 	CurrentDimensionSettings = Settings;
 }
 
