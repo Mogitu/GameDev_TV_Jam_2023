@@ -50,6 +50,7 @@ void AGJGameMode::OnActorKilled(AActor* Victim, AActor* Killer)
 
 	if (auto PlayerCharacter = Cast<AGJPlayerCharacter>(Victim))
 	{
+		SetDimension(EDimension::GhostDimension);
 		if (GameOverWidgetClass)
 		{
 			WidgetClassToSpawn = GameOverWidgetClass;
